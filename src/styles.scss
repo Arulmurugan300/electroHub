@@ -1,1 +1,94 @@
 /* You can add global styles to this file, and also import other style files */
+@import "https://fonts.googleapis.com/css?family=Montserrat";
+
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.start-center {
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.start-start {
+  justify-content: start;
+  align-items: start;
+}
+
+.start-end {
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+
+.center-center {
+  justify-content: center;
+  align-items: center;
+}
+
+.center-start {
+  justify-content: center;
+  align-items: start;
+}
+
+.center-end {
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.end-center {
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.end-start {
+  justify-content: flex-end;
+  align-items: start;
+}
+
+.end-end {
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.stretch-start{
+  justify-content: stretch;
+  align-items: start;
+}
+
+.stretch-center{
+  justify-content: stretch;
+  align-items: center;
+}
+
+.stretch-end {
+  justify-content: stretch;
+  align-items: flex-end;
+}
+
+.start-stretch {
+  justify-content: start;
+  align-items: stretch;
+}
+
+.center-stretch {
+  justify-content: center;
+  align-items: stretch;
+}
+
+.end-stretch {
+  justify-content: flex-end;
+  align-items: stretch;
+}

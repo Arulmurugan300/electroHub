@@ -1,0 +1,44 @@
+<div class="login-wrapper flex-row center-center">
+  <div class="login-container flex-column center-stretch">
+    <div class="flex-row center-center">
+      <img src="./assets/logo.png" height="50px" width="50px" alt="webpage-logo">
+    </div>
+    <h2 class="login-title">{{signInConstants.SIGN_IN_STATIC_DATA.NAME}}</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="login-form">
+        <label for="email" class="login-label">{{signInConstants.SIGN_IN_STATIC_DATA.EMAIL_LABEL}}</label>
+        <input class="login-input" type="email" id="email" required formControlName="email"
+          [placeholder]="signInConstants.SIGN_IN_STATIC_DATA.EMAIL_PLACEHOLDER"
+          [class.invalid]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" />
+        <div class="login-error">
+          @if(loginForm.get('email')?.hasError('required') && (this.loginForm.get('email')?.touched ||
+          this.loginForm.get('email')?.dirty)){
+          {{signInConstants.ERROR_MESSAGES.EMAIL_REQUIRED}}
+          }
+          @if(loginForm.get('email')?.hasError('pattern')){
+          {{signInConstants.ERROR_MESSAGES.EMAIL_INVALID}}
+          }
+        </div>
+      </div>
+
+      <div class="login-form">
+        <label for="password" class="login-label">{{signInConstants.SIGN_IN_STATIC_DATA.PASSWORD_LABEL}}</label>
+        <div class="password-wrapper">
+          <input class="login-input" [type]="isPasswordVisible ? 'text' : 'password'" id="password" required
+            formControlName="password" [placeholder]="signInConstants.SIGN_IN_STATIC_DATA.PASSWORD_PLACEHOLDER"
+            [class.invalid]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" />
+          <mat-icon (click)="togglePasswordVisibility()" class="visibility-icon">
+            {{ isPasswordVisible ? 'visibility_off' : 'visibility' }}
+          </mat-icon>
+        </div>
+        <div class="login-error">
+          @if(loginForm.get('password')?.hasError('required') && (this.loginForm.get('password')?.touched ||
+          this.loginForm.get('password')?.dirty)){
+          {{signInConstants.ERROR_MESSAGES.PASSWORD_REQUIRED}}
+          }
+        </div>
+      </div>
+      <button class="login-button" type="submit" [disabled]="loginForm.invalid">Sign In</button>
+    </form>
+  </div>
+</div>
