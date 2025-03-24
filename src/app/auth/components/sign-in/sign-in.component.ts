@@ -1,12 +1,11 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SIGN_IN_CONSTANTS } from '../../constants/sign-in.constants';
-import { SignInModel, SignInResponseModel } from '../../models/sign-in.models';
+import { SignInModel } from '../../models/sign-in.models';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { SignInService } from '../../services/sign-in.service';
 
 @Component({
   selector: 'eh-sign-in',
@@ -38,7 +37,7 @@ export class SignInComponent implements OnInit {
    */
   constructor(
     private route: Router,
-    private httpClient: HttpClient,
+    private signInService: SignInService,
     private _snackBar: MatSnackBar
   ) { }
   /**
@@ -64,8 +63,12 @@ export class SignInComponent implements OnInit {
    * and handles navigation and success/error responses.
    */
   onSubmit(): void {
-    if (this.loginForm.valid) {
-      this.httpClient.post<SignInResponseModel>('http://localhost:3000/v1/login', this.loginForm.value)
+    if (this.loginForm.valid && this.loginForm.value.email && this.loginForm.value.password) {
+      const loginInput = {
+        email: this.loginForm.value.email,
+        password: this.loginForm.value.password
+      }
+      this.signInService.login(loginInput)
         .subscribe((response) => {
           if (response && response.token) {
             localStorage.setItem('token', response.token);
@@ -81,7 +84,7 @@ export class SignInComponent implements OnInit {
    * @param {string} action - The action button text (e.g., 'OK').
    */
   openSnackBar(message: string, action: string): void {
-    this._snackBar.open(message, action, { duration: 2000 });
+    this._snackBar.open(message, action, { panelClass: ['success-snack-bar'] });
   }
 
 }

@@ -5,6 +5,11 @@ export interface SignInModel {
   password: FormControl<string | null>;
 }
 
+export interface SignInInputModel {
+  email: string | null;
+  password: string | null;
+}
+
 export interface SignInResponseModel {
   token: string;
   message: string;
